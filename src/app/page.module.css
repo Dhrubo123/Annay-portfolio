@@ -46,6 +46,31 @@
   color: var(--primary);
 }
 
+.navContent {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.headerSocials {
+  display: flex;
+  gap: 1.2rem;
+  border-left: 1px solid #333;
+  padding-left: 1.5rem;
+}
+
+.headerSocials svg {
+  width: 20px;
+  height: 20px;
+  fill: #888;
+  transition: all 0.3s ease;
+}
+
+.headerSocials a:hover svg {
+  fill: var(--primary);
+  transform: translateY(-2px);
+}
+
 /* Hero */
 .hero {
   min-height: 100vh;
@@ -103,6 +128,40 @@
 .heroButtons {
   display: flex;
   gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.heroSocials {
+  display: flex;
+  gap: 2rem;
+}
+
+.heroSocialIcon {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #888;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.heroSocialIcon svg {
+  width: 20px;
+  height: 20px;
+  fill: #888;
+  transition: all 0.3s ease;
+}
+
+.heroSocialIcon:hover {
+  color: var(--foreground);
+}
+
+.heroSocialIcon:hover svg {
+  fill: var(--primary);
+  transform: scale(1.2) rotate(-5deg);
 }
 
 .heroImageContainer {
@@ -526,12 +585,31 @@
 /* Footer */
 .footer {
   text-align: center;
-  padding: 3rem;
+  padding: 4rem;
   border-top: 1px solid #222;
   color: #555;
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.footerSocials {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.footerSocials svg {
+  width: 24px;
+  height: 24px;
+  fill: #444;
+  transition: all 0.3s ease;
+}
+
+.footerSocials a:hover svg {
+  fill: var(--primary);
+  transform: translateY(-5px);
 }
 
 @media (max-width: 768px) {
