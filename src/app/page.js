@@ -1,65 +1,132 @@
-import Image from "next/image";
+'use client';
+
+import styles from './page.module.css';
 
 export default function Home() {
+  async function handleDownloadCV() {
+    try {
+      const res = await fetch('/annay-barua-cv.pdf');
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Annay_Barua_CV.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Download failed:', err);
+    }
+  }
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className={styles.main}>
+      {/* Navbar Placeholder */}
+      <header className={styles.header}>
+        <div className={`container ${styles.nav}`}>
+          <h1 className={styles.logo}>AB.</h1>
+          <nav>
+            <ul className={styles.navLinks}>
+              <li><a href="#about">About</a></li>
+              <li><a href="#skills">Skills</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </header>
+
+      {/* Hero Section */}
+      <section className={`${styles.hero} container`}>
+        <div className={styles.heroContainer}>
+          <div className={styles.heroContent}>
+            <h2 className="animate-fade-in">Hello, I'm</h2>
+            <h1 className={`${styles.name} animate-fade-in delay-1`}>Annay Barua</h1>
+            <p className={`${styles.subtitle} animate-fade-in delay-2`}>
+              CSE Graduate from <strong>East Delta University</strong>
+            </p>
+            <div className={`${styles.heroButtons} animate-fade-in delay-3`}>
+              <a href="#contact" className={styles.primaryBtn}>Get in Touch</a>
+              <a href="#projects" className={styles.secondaryBtn}>View Work</a>
+            </div>
+          </div>
+          <div className={`${styles.heroImageContainer} animate-fade-in delay-2`}>
+            <div className={styles.heroImageWrapper}>
+              <img src="/annay-barua.png" alt="Annay Barua" className={styles.heroImage} />
+            </div>
+            <span className={styles.heroDot1} />
+            <span className={styles.heroDot2} />
+            <span className={styles.heroDot3} />
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="section container">
+        <h2 className="section-title">About Me</h2>
+        <div className={styles.aboutGrid}>
+          <div className={styles.aboutText}>
+            <p>
+              I am a passionate Computer Science and Engineering graduate from East Delta University.
+              I love building functional, dynamic, and beautiful web experiences. My journey in tech
+              has equipped me with a strong foundation in software development, problem-solving, and
+              modern web technologies.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className={`section container ${styles.skillsSection}`}>
+        <h2 className="section-title">Skills & Technologies</h2>
+        <div className={styles.skillsGrid}>
+          {['JavaScript', 'React', 'Next.js', 'Node.js', 'Python', 'C++', 'Git', 'SQL'].map(skill => (
+            <div key={skill} className={styles.skillCard}>
+              {skill}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="section container">
+        <h2 className="section-title">Featured Projects</h2>
+        <div className={styles.projectsGrid}>
+          {/* Project placeholders */}
+          {[1, 2, 3].map(item => (
+            <div key={item} className={styles.projectCard}>
+              <div className={styles.projectImage}></div>
+              <div className={styles.projectInfo}>
+                <h3>Project Title {item}</h3>
+                <p>A brief description of the project, the technologies used, and the problem it solved.</p>
+                <div className={styles.projectTags}>
+                  <span>React</span><span>Node.js</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className={`section container ${styles.contactSection}`}>
+        <h2 className="section-title">Let's Connect</h2>
+        <div className={styles.contactCard}>
+          <p>I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
+          <div className={styles.contactButtons}>
+            <a href="tel:+8801610057719" className={styles.primaryBtn}>Call Me</a>
+            <a href="mailto:annaybarua365@gmail.com" className={styles.secondaryBtn}>Email Me</a>
+            <div className={styles.cvButtons}>
+              <a href="/annay-barua-cv.pdf" target="_blank" className={styles.secondaryBtn}>View CV</a>
+              <button onClick={handleDownloadCV} className={styles.secondaryBtn}>Download CV</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className={styles.footer}>
+        <p>&copy; {new Date().getFullYear()} Developed By APARUP BARUA. All rights reserved.</p>
+      </footer>
+    </main>
   );
 }
