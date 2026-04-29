@@ -199,7 +199,7 @@ export default function Home() {
             <a href="tel:+8801610057719" className={styles.primaryBtn}>Call Me</a>
             <a href="mailto:annaybarua365@gmail.com" className={styles.secondaryBtn}>Email Me</a>
             <div className={styles.cvButtons}>
-              <a href="/Annay_Barua_CV.pdf" target="_blank" className={styles.secondaryBtn}>View CV</a>
+              <a href="/Annay_Barua.pdf" target="_blank" className={styles.secondaryBtn}>View CV</a>
               <button onClick={() => downloadFile('/Annay_Barua_CV.pdf', 'Annay_Barua_CV.pdf')} className={styles.secondaryBtn}>Download CV</button>
             </div>
           </div>
