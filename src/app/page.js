@@ -3,14 +3,14 @@
 import styles from './page.module.css';
 
 export default function Home() {
-  async function handleDownloadCV() {
+  const downloadFile = async (filePath, fileName) => {
     try {
-      const res = await fetch('/annay-barua-cv.pdf');
+      const res = await fetch(filePath);
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'Annay_Barua_CV.pdf';
+      a.download = fileName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -18,7 +18,38 @@ export default function Home() {
     } catch (err) {
       console.error('Download failed:', err);
     }
-  }
+  };
+
+  const certificates = [
+    {
+      title: "CCNA v7 Bridging",
+      file: "/AnnayBarua-CCNAv7_Bridging_-certificate.pdf",
+    },
+    {
+      title: "Cybersecurity Essentials",
+      file: "/AnnayBarua-Cybersecurity_Es-certificate.pdf",
+    },
+    {
+      title: "Introduction to Cybersecurity",
+      file: "/AnnayBarua-Introduction_to_-certificate.pdf",
+    },
+    {
+      title: "Networking Essentials",
+      file: "/AnnayBarua-Networking-Essen-certificate.pdf",
+    },
+    {
+      title: "HTML & CSS",
+      file: "/680b0ba4891f394bffdba5c0.pdf",
+    },
+    {
+      title: "JavaScript",
+      file: "/680b5a274354a4ffc3244699.pdf",
+    },
+    {
+      title: "DataAnalytics",
+      file: "/686390e1ea78d2cd5cd85a3a.pdf",
+    },
+  ];
   return (
     <main className={styles.main}>
       {/* Navbar Placeholder */}
@@ -29,7 +60,7 @@ export default function Home() {
             <ul className={styles.navLinks}>
               <li><a href="#about">About</a></li>
               <li><a href="#skills">Skills</a></li>
-              <li><a href="#projects">Projects</a></li>
+              <li><a href="#certificates">Certificates</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
           </nav>
@@ -47,7 +78,7 @@ export default function Home() {
             </p>
             <div className={`${styles.heroButtons} animate-fade-in delay-3`}>
               <a href="#contact" className={styles.primaryBtn}>Get in Touch</a>
-              <a href="#projects" className={styles.secondaryBtn}>View Work</a>
+              <a href="#certificates" className={styles.secondaryBtn}>View Certificates</a>
             </div>
           </div>
           <div className={`${styles.heroImageContainer} animate-fade-in delay-2`}>
@@ -80,7 +111,7 @@ export default function Home() {
       <section id="skills" className={`section container ${styles.skillsSection}`}>
         <h2 className="section-title">Skills & Technologies</h2>
         <div className={styles.skillsGrid}>
-          {['JavaScript', 'React', 'Next.js', 'Node.js', 'Python', 'C++', 'Git', 'SQL'].map(skill => (
+          {['Python', 'C', 'HTML', 'CSS', 'Data analytics (Microsoft Power BI)', 'Penetration testing', 'Networking', 'Java'].map(skill => (
             <div key={skill} className={styles.skillCard}>
               {skill}
             </div>
@@ -88,25 +119,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="section container">
-        <h2 className="section-title">Featured Projects</h2>
-        <div className={styles.projectsGrid}>
-          {/* Project placeholders */}
-          {[1, 2, 3].map(item => (
-            <div key={item} className={styles.projectCard}>
-              <div className={styles.projectImage}></div>
-              <div className={styles.projectInfo}>
-                <h3>Project Title {item}</h3>
-                <p>A brief description of the project, the technologies used, and the problem it solved.</p>
-                <div className={styles.projectTags}>
-                  <span>React</span><span>Node.js</span>
+
+      {/* Certificates Section */}
+      <section id="certificates" className="section container">
+        <h2 className="section-title">E-Certificates</h2>
+        <div className={styles.certificatesGrid}>
+          {certificates.map((cert, index) => (
+            <div key={index} className={styles.certCard}>
+              <div className={styles.certImageWrapper}>
+                <iframe
+                  src={`${cert.file}#toolbar=0&navpanes=0&scrollbar=0`}
+                  className={styles.certPdfPreview}
+                />
+                <div className={styles.certOverlay}>
+                  <a href={cert.file} target="_blank" className={styles.viewBtn}>View Full PDF</a>
                 </div>
+              </div>
+              <div className={styles.certInfo}>
+                <h3>{cert.title}</h3>
+                <button
+                  onClick={() => downloadFile(cert.file, `${cert.title.replace(/\s+/g, '_')}_Certificate.pdf`)}
+                  className={styles.certDownloadBtn}
+                >
+                  Download PDF
+                </button>
               </div>
             </div>
           ))}
         </div>
       </section>
+
 
       {/* Contact Section */}
       <section id="contact" className={`section container ${styles.contactSection}`}>
@@ -118,7 +160,7 @@ export default function Home() {
             <a href="mailto:annaybarua365@gmail.com" className={styles.secondaryBtn}>Email Me</a>
             <div className={styles.cvButtons}>
               <a href="/annay-barua-cv.pdf" target="_blank" className={styles.secondaryBtn}>View CV</a>
-              <button onClick={handleDownloadCV} className={styles.secondaryBtn}>Download CV</button>
+              <button onClick={() => downloadFile('/annay-barua-cv.pdf', 'Annay_Barua_CV.pdf')} className={styles.secondaryBtn}>Download CV</button>
             </div>
           </div>
         </div>
